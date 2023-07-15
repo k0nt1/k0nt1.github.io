@@ -40,11 +40,12 @@ body {
 
 .image-container {
     width: 25%;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     perspective: 50rem;
-
+    
     @media screen and (max-width: 687px) {
         width: 45%;
+        margin-bottom: 0;
     }
 }
 
@@ -73,19 +74,23 @@ body {
     padding: 1.7rem;
 }
 
-.svg-container .st0 {
+.svg-container svg {
+    -webkit-font-smoothing: antialiased;
+}
+
+.svg-container svg path.st0 {
     fill: #ffffff;
 }
 
-.svg-container:hover .st1 {
+.svg-container:hover svg path.st1 {
     fill: black;
 }
 
-.svg-container .st1 {
+.svg-container svg path.st1 {
     fill: #404040;
 }
 
-.svg-container:hover .st1 {
+.svg-container:hover svg path.st1 {
     fill: black;
 }
 
@@ -100,7 +105,7 @@ ul {
     padding: 0;
     margin: 0;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 799px) {
         gap: 1rem;
     }
 }
@@ -143,6 +148,7 @@ ul li a {
     color: #404040;
     margin: 0 30px;
     transition: .5s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 ul li a:hover {
@@ -230,6 +236,10 @@ ul li a:hover span:nth-child(4) {
     transform: scale(1);
     transform-origin: bottom;
     transition: transform .5s;
+}
+
+footer p {
+    text-align: center;
 }
 
 /* SOCIAL NETWORKS */

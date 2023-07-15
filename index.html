@@ -143,21 +143,15 @@
 
       // show copyrights
       copyRights.innerHTML = `
-        <span>&copy;</span> ${currentYear} <b>k0nt1</b>. All rights reserved.
-      `;
+  <span>&copy;</span> ${currentYear} <b>k0nt1</b>. All rights reserved.
+`;
 
       // Function to handle drag start event
       function handleDragStart(event) {
         draggedItem = this;
-        draggedItem.classList.add("is-dragging");
         event.dataTransfer.effectAllowed = "move";
-        const items = Array.from(sortableList.querySelectorAll("li"));
-        const index = items.indexOf(draggedItem);
-        
-        console.log('INDEX', index);
-
-        // Store the index as a data attribute
-        event.dataTransfer.setData("text/plain", index);
+        event.dataTransfer.setData("text/html", this.innerHTML);
+        this.classList.add("dragging");
       }
 
       // Function to handle drag over event
@@ -175,24 +169,24 @@
           event.stopPropagation();
         }
         if (draggedItem !== this) {
-          draggedItem.innerHTML = this.innerHTML;
-          this.innerHTML = event.dataTransfer.getData("text/html");
+          this.parentNode.insertBefore(draggedItem, this.nextSibling);
+          this.style.opacity = 1;
         }
         return false;
       }
 
       // Function to handle drag end event
-      function handleDragEnd(event) {
-        draggedItem.classList.remove("is-dragging"); // Remove is-dragging class
+      function handleDragEnd() {
+        this.classList.remove("dragging");
       }
 
-      // Add event listeners to draggable elements
+      // Add event listeners to draggable elements for drag events
       const items = sortableList.querySelectorAll("li");
       items.forEach((item) => {
         item.addEventListener("dragstart", handleDragStart, false);
-        item.addEventListener("dragend", handleDragEnd, false);
         item.addEventListener("dragover", handleDragOver, false);
         item.addEventListener("drop", handleDrop, false);
+        item.addEventListener("dragend", handleDragEnd, false);
       });
     </script>
   </body>
